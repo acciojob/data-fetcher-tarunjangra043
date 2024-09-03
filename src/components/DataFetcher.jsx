@@ -18,7 +18,10 @@ const DataFetcher = () => {
       {error ? (
         <p>{error}</p>
       ) : data ? (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <div>
+          <h1>Data Fetched from API</h1>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
       ) : (
         <h1>Loading...</h1>
       )}
