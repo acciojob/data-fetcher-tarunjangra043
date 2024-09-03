@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const DataFetcher = () => {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("https://dummyjson.com/products")
@@ -9,12 +10,18 @@ const DataFetcher = () => {
       .then((jsonData) => {
         setData(jsonData);
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => setError("An error occurred: " + error.message));
   }, []);
 
   return (
     <div>
-      <pre>{data ? JSON.stringify(data, null, 2) : "Loading..."}</pre>
+      {error ? (
+        <p>{error}</p>
+      ) : data ? (
+        <pre>{JSON.stringify(data, null, 2)}</pre>
+      ) : (
+        <h1>Loading...</h1>
+      )}
     </div>
   );
 };
